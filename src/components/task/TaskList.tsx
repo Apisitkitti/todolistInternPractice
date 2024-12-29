@@ -9,3 +9,4 @@ const TaskList = ({ tasks }: { tasks: taskItemType[] }) => {
     </div>
   )
 }
+export default TaskList
