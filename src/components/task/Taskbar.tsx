@@ -4,18 +4,41 @@ import { taskItemType } from "../taskbarType/taskType"
 import TaskList from "./TaskList"
 
 const Taskbar = () => {
+  const url = 'http://localhost:3000/post'
   const [data, setData] = useState<taskItemType[]>([])
-  const [task, setTask] = useState<string>("")
-  const handleClickToPushDataToJson = (task: taskItemType) => {
-    setData((prevtask) => [...prevtask, task])
-  }
+  const [inputTask, setInputTask] = useState<taskItemType>(
+    {
+      key: null,
+      task: ""
+    })
 
+  const handleClickToPushDataToJson = async () => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(inputTask)
+      })
+      if (response.ok) {
+        const result = await response.json
+        console.log(`add task:${result}`)
+        setData((prevtask) => [...prevtask, inputTask])
+      }
+    } catch (err) {
+      console.error(err)
+    }
+    setInputTask({
+      key: null,
+      task: ""
+    })
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://localhost:3000/post'
-        let taskData = await fetch(url)
-        let taskObject: taskItemType[] = await taskData.json()
+        const taskData = await fetch(url)
+        const taskObject: taskItemType[] = await taskData.json()
         console.log(taskObject);
         setData(taskObject)
       } catch (err) {
@@ -31,14 +54,17 @@ const Taskbar = () => {
           <input type="text"
             aria-label="taskbarInput"
             placeholder="Input Your Task"
-            className="w-max "
-            onChange={(e) => setTask(e.target.value)} />
+            onChange={(e) => setInputTask(
+              {
+                key: Date.now(),
+                task: e.target.value
+              })} />
         </div>
         <TaskbarButton
           color="bg-green-400"
           icon="../../img/addIcon.png"
           iconAlt="add button"
-
+          onClick={handleClickToPushDataToJson}
         />
       </div>
       <TaskList tasks={data} />
