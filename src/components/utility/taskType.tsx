@@ -1,4 +1,4 @@
 export interface taskItemType {
-  key: number | null,
+  id: number | null,
   task: string
 }
