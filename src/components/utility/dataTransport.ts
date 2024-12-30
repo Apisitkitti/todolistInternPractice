@@ -1,5 +1,4 @@
 import { taskItemType } from "./taskType";
-
 const url = "http://localhost:3000/post";
 
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
@@ -28,5 +27,25 @@ export const pushJsonData = async (inputTask: taskItemType) => {
     }
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const deleteTask = async (inputTask: taskItemType[], id: number) => {
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputTask[id]),
+    });
+
+    if (response.ok) {
+      const dataInJsObject = await response.json;
+      console.log(`delete task:${dataInJsObject}`);
+    }
+  } catch (err) {
+    console.error(err);
+    console.log("delete" + inputTask[id]);
   }
 };

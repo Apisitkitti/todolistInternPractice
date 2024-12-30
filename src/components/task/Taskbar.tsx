@@ -7,7 +7,7 @@ const Taskbar = () => {
   const [data, setData] = useState<taskItemType[]>([])
   const [inputTask, setInputTask] = useState<taskItemType>(
     {
-      id: null,
+      id: 0,
       task: ""
     })
   const handleClickToPushDataToJson = async () => {
@@ -15,10 +15,11 @@ const Taskbar = () => {
     pushJsonData(inputTask)
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({
-      id: null,
+      id: 0,
       task: ""
     })
   }
+
   useEffect(() => {
     fetchData(setData)
   }, [])
@@ -32,7 +33,7 @@ const Taskbar = () => {
             placeholder="Input Your Task"
             onChange={(e) => setInputTask(
               {
-                id: Date.now(),
+                id: 0,
                 task: e.target.value
               })} />
         </div>
