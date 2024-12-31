@@ -14,7 +14,7 @@ const Taskbar = () => {
     })
   const handleClickToPushDataToJson = async () => {
     if (inputTask.task.trim() === "") return;
-    const newId = await data.length > 0 ? data.length : 0
+    const newId:number = await data.length > 0 ? data.length : 0
     pushJsonData({ id: newId, task: inputTask.task })
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({
