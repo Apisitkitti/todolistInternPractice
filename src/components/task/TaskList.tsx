@@ -6,13 +6,12 @@ const TaskList = ({ tasks }: { tasks: taskItemType[] }) => {
   }
   return (
     <div className="flex flex-col">
-      {tasks && tasks.map((taskItem, index) =>
-        <li key={index} className="list-none">
+      {tasks && tasks.map((taskItem) =>
+        <li key={taskItem.id} className="list-none">
           <TaskbarItem
             taskItem={taskItem}
-            key={taskItem.id}
-            editTask={() => editTask(index)}
-            deleteTask={() => deleteTask(tasks, index)} />
+            editTask={() => editTask(taskItem.id)}
+            deleteTask={() => deleteTask(taskItem.id)} />
         </li>
 
       )}
