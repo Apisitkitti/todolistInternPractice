@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import TaskbarButton from "./Taskbarbutton"
 import { taskItemType } from "../utility/taskType"
 import TaskList from "./TaskList"
+import EditModal from "./EditModal"
 import { fetchData, pushJsonData } from "../utility/dataTransport"
 const Taskbar = () => {
   const [data, setData] = useState<taskItemType[]>([])
@@ -47,6 +48,7 @@ const Taskbar = () => {
         />
       </div>
       <TaskList tasks={data} />
+      { }
     </div>
   )
 }

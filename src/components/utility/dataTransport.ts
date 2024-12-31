@@ -1,4 +1,6 @@
+import { JsxEmit } from "typescript";
 import { taskItemType } from "./taskType";
+import { json } from "stream/consumers";
 const url = "http://localhost:3000/posts";
 
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
@@ -45,5 +47,21 @@ export const deleteTask = async (id: number) => {
   } catch (err) {
     console.error(err);
     console.log("delete" + id);
+  }
+};
+export const editTask = async (id: number, newTask: string) => {
+  try {
+    const response = await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ task: newTask }),
+    });
+    if (response.ok) {
+      const result = await response.json;
+    }
+  } catch (err) {
+    console.error(err);
   }
 };
