@@ -1,14 +1,26 @@
 import { editTask } from "../utility/dataTransport"
 import TaskbarButton from "./Taskbarbutton"
-import { taskItemType } from "../utility/taskType"
 import { useState } from "react"
-const EditModal = ({ isOpen, taskID }: { isOpen: boolean, taskID: number }) => {
+const EditModal = ({ taskID, isOpen }: { taskID: number, isOpen: boolean }) => {
   const [task, setTask] = useState<string>("");
+
+  const handleEdit = () => {
+    if (task.trim() === "") return
+    editTask(taskID, task)
+  }
   return (
-    <form className="flex justify-center items-center absolute" onBlur={() => (isOpen = false)}>
-      <input type="text" onChange={(e) => setTask(e.target.value)} />
-      <TaskbarButton color="bg-sky-500" icon="../../img/editIcon.png" iconAlt="edit icon" onClick={() => editTask(taskID, task)} />
-    </form>
+    <div>
+      {isOpen &&
+        <form className="absolute flex top-0">
+          <div className="w-full bg-white rounded-md flex items-center ">
+            <input type="text"
+              className="bg-transparent text-black px-1 focus:outline-none w-[245px]"
+              onChange={(e) => setTask(e.target.value)}
+            />
+          </div>
+          <TaskbarButton color="bg-green-600" icon="Submit" iconAlt="add icon" onClick={handleEdit} />
+        </form>}
+    </div>
   )
 }
 export default EditModal

@@ -13,8 +13,8 @@ const TaskbarButton = (
       onClick?: () => void
     }) => {
   return (
-    <div className={`${color} size-7 p-1 `} onClick={onClick} >
-      <img src={icon} alt={iconAlt} />
+    <div className={`${color} size-7 p-1 w-max flex items-center rounded-md mx-0.5 text-white cursor-pointer `} onClick={onClick} >
+      {icon}
     </div>
   )
 }

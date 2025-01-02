@@ -10,19 +10,21 @@ const TaskbarItem = (
   }:
     {
       taskItem: taskItemType,
-      deleteTask: () => void,
+      deleteTask: () => void
     }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <div
       key={taskItem.id}
-      className="bg-red-300 flex justify-between">
-      <div> {taskItem.task}</div>
+      className="flex justify-between my-1 relative">
+      <div className="w-52">
+        {taskItem.task}
+        <EditModal taskID={taskItem.id} isOpen={isOpen} />
+      </div>
+
       <div className="flex">
-        <TaskbarButton color="bg-sky-500" icon="../../img/addIcon.png" iconAlt="edit icon" onClick={() => setIsOpen(true)} />
-        <TaskbarButton color="bg-red-500" icon="../../img/deleteIcon.png" iconAlt="delete icon" onClick={deleteTask} />
-        {isOpen &&
-          <EditModal isOpen taskID={taskItem.id} />}
+        <TaskbarButton color="bg-sky-500" icon="Edit" iconAlt="edit icon" onClick={() => setIsOpen(true)} />
+        <TaskbarButton color="bg-red-500" icon="Delete" iconAlt="delete icon" onClick={deleteTask} />
       </div>
     </div>
   )

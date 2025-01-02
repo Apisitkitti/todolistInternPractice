@@ -59,7 +59,7 @@ export const editTask = async (id: number, newTask: string) => {
       body: JSON.stringify({ task: newTask }),
     });
     if (response.ok) {
-      const result = await response.json;
+      alert("Edit Successfull");
     }
   } catch (err) {
     console.error(err);

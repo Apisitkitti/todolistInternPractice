@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react"
 import TaskbarButton from "./Taskbarbutton"
 import { taskItemType } from "../utility/taskType"
-import TaskList from "./TaskList"
 import EditModal from "./EditModal"
+import TaskList from "./TaskList"
 import { fetchData, pushJsonData } from "../utility/dataTransport"
 const Taskbar = () => {
   const [data, setData] = useState<taskItemType[]>([])
-  const idItem = 0;
   const [inputTask, setInputTask] = useState<taskItemType>(
     {
-      id: idItem,
+      id: 0,
       task: ""
     })
-  const handleClickToPushDataToJson = async () => {
+  const handleClickToPushDataToJson = () => {
     if (inputTask.task.trim() === "") return;
-    const newId:number = await data.length > 0 ? data.length : 0
+    const newId = data.length > 0 ? data.length : 0
     pushJsonData({ id: newId, task: inputTask.task })
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({
-      id: idItem,
+      id: 0,
       task: ""
     })
   }
@@ -28,27 +27,27 @@ const Taskbar = () => {
   }, [])
 
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center">
-        <div className="w-full">
+    <div className="flex items-center flex-row justify-around">
+      <div className="flex frame">
+        <div className="w-full bg-white rounded-md flex items-center">
           <input type="text"
             aria-label="taskbarInput"
             placeholder="Input Your Task"
+            className="bg-transparent text-black px-1 focus:outline-none"
             onChange={(e) => setInputTask(
               {
-                id: idItem,
+                id: 0,
                 task: e.target.value
               })} />
         </div>
         <TaskbarButton
-          color="bg-green-400"
-          icon="../../img/addIcon.png"
+          color="bg-green-600"
+          icon="Add"
           iconAlt="add button"
           onClick={handleClickToPushDataToJson}
         />
       </div>
       <TaskList tasks={data} />
-      { }
     </div>
   )
 }

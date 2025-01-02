@@ -2,9 +2,11 @@ import React from 'react';
 import Taskbar from './components/task/Taskbar';
 const App = () => {
   return (
-    <div className=" flex justify-center h-full">
+    <div>
+      <div className='flex justify-center font-bold '>TODOLIST</div>
       <Taskbar />
-    </div>
+
+    </div >
   );
 }
 
