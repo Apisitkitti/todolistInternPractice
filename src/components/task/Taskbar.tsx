@@ -27,7 +27,7 @@ const Taskbar = () => {
   }, [])
 
   return (
-    <div className="flex items-center flex-row justify-around">
+    <div className="flex items-center justify-around flex-col md:flex-row ">
       <div className="flex frame">
         <div className="w-full bg-white rounded-md flex items-center">
           <input type="text"
