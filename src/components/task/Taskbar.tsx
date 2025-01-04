@@ -13,8 +13,8 @@ const Taskbar = () => {
     })
   const handleClickToPushDataToJson = () => {
     if (inputTask.task.trim() === "") return;
-    const newId = data.length > 0 ? data.length : 0
-    pushJsonData({ id: newId, task: inputTask.task })
+    // const newId = data.length > 0 ? data.length : 0
+    pushJsonData(inputTask.task)
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({
       id: 0,
@@ -27,7 +27,7 @@ const Taskbar = () => {
   }, [])
 
   return (
-    <div className="flex items-center justify-around flex-col md:flex-row ">
+    <div className="flex items-center justify-around flex-col sm:flex-row ">
       <div className="flex frame">
         <div className="w-full bg-white rounded-md flex items-center">
           <input type="text"

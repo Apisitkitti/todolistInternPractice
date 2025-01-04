@@ -1,25 +1,26 @@
-import { JsxEmit } from "typescript";
 import { taskItemType } from "./taskType";
-import { json } from "stream/consumers";
-const url = "http://localhost:3000/posts";
+const url = "http://localhost:3000";
 
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
   try {
-    const taskData = await fetch(url);
+    const taskData = await fetch(`${url}/all_tasks`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
     const taskObject: taskItemType[] = await taskData.json();
     setData(taskObject);
   } catch (err) {
     console.error(err);
   }
 };
-export const pushJsonData = async (inputTask: taskItemType) => {
+export const pushJsonData = async (inputTask: string) => {
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`${url}/task`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(inputTask),
+      body: JSON.stringify({ task: inputTask }),
     });
     if (response.ok) {
       const result = await response.json;
