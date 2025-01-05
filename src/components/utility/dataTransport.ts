@@ -3,7 +3,7 @@ const url = "http://localhost:3000";
 
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
   try {
-    const taskData = await fetch(`${url}/all_tasks`, {
+    const taskData = await fetch(`${url}/allTasks`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -33,13 +33,13 @@ export const pushJsonData = async (inputTask: string) => {
 
 export const deleteTask = async (id: number) => {
   try {
-    const response = await fetch(`${url}/${id}`, {
+    const response = await fetch(`${url}/deleteTask`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ id: id }),
     });
-
     if (response.ok) {
       const dataInJsObject = await response.json;
       console.log(`delete task:${dataInJsObject}`);

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import TaskbarButton from "./Taskbarbutton"
 import { taskItemType } from "../utility/taskType"
-import EditModal from "./EditModal"
 import TaskList from "./TaskList"
 import { fetchData, pushJsonData } from "../utility/dataTransport"
 const Taskbar = () => {
@@ -13,7 +12,6 @@ const Taskbar = () => {
     })
   const handleClickToPushDataToJson = () => {
     if (inputTask.task.trim() === "") return;
-    // const newId = data.length > 0 ? data.length : 0
     pushJsonData(inputTask.task)
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({

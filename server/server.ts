@@ -16,8 +16,8 @@ const db = new sqlite3.Database(database, sqlite3.OPEN_READWRITE, (err) => {
   }
 });
 
-app.get("/all_tasks", (req, res) => {
-  db.all("SELECT * FROM Tasks", (err, rows) => {
+app.get("/allTasks", (req, res) => {
+  db.all("SELECT * FROM Tasks", [], (err, rows) => {
     err
       ? console.error(`fetch error, ${err.message}`)
       : console.log("now get data");
@@ -30,9 +30,20 @@ app.post("/task", (req, res) => {
   const query = "INSERT INTO Tasks (task) VALUES (?) ";
   db.run(query, [task], (err) => {
     err
-      ? console.error(`push error, ${err.message}`)
+      ? console.error(`push error: ${err.message}`)
       : console.log("push data successfull");
     res.json({ id: this.lastID, task });
+  });
+});
+
+app.delete("/deleteTask", (req, res) => {
+  const { id } = req.body;
+  const query = "DELETE FROM Tasks WHERE id == (?)";
+  db.run(query, [id], (err, rows) => {
+    err
+      ? console.error(`delete data error: ${err.message}`)
+      : console.log("delete successfull");
+    res.json(rows);
   });
 });
 

@@ -15,8 +15,8 @@ var db = new sqlite3.Database(database, sqlite3.OPEN_READWRITE, function (err) {
         db.run(sql);
     }
 });
-app.get("/all_tasks", function (req, res) {
-    db.all("SELECT * FROM Tasks", function (err, rows) {
+app.get("/allTasks", function (req, res) {
+    db.all("SELECT * FROM Tasks", [], function (err, rows) {
         err
             ? console.error("fetch error, ".concat(err.message))
             : console.log("now get data");
@@ -28,9 +28,19 @@ app.post("/task", function (req, res) {
     var query = "INSERT INTO Tasks (task) VALUES (?) ";
     db.run(query, [task], function (err) {
         err
-            ? console.error("push error, ".concat(err.message))
+            ? console.error("push error: ".concat(err.message))
             : console.log("push data successfull");
         res.json({ id: _this.lastID, task: task });
+    });
+});
+app.delete("/deleteTask", function (req, res) {
+    var id = req.body.id;
+    var query = "DELETE FROM Tasks WHERE id == (?)";
+    db.run(query, [id], function (err, rows) {
+        err
+            ? console.error("delete data error: ".concat(err.message))
+            : console.log("delete successfull");
+        res.json(rows);
     });
 });
 app.listen(3000, function () { return console.log("listen at port 3000"); });
