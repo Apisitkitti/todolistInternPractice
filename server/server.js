@@ -43,4 +43,14 @@ app.delete("/deleteTask", function (req, res) {
         res.json(rows);
     });
 });
+app.put("/updateTask", function (req, res) {
+    var _a = req.body, id = _a.id, task = _a.task;
+    var query = "UPDATE Tasks SET task = (?) WHERE id = (?) ";
+    db.run(query, [task, id], function (err) {
+        err
+            ? console.error("edit unsuccesfull: ".concat(err.message))
+            : console.log("edit successful");
+        res.json({ id: id, task: task });
+    });
+});
 app.listen(3000, function () { return console.log("listen at port 3000"); });

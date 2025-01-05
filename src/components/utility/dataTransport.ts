@@ -52,12 +52,12 @@ export const deleteTask = async (id: number) => {
 };
 export const editTask = async (id: number, newTask: string) => {
   try {
-    const response = await fetch(`${url}/${id}`, {
+    const response = await fetch(`${url}/updateTask`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ task: newTask }),
+      body: JSON.stringify({ id: id, task: newTask }),
     });
     if (response.ok) {
       alert("Edit Successfull");

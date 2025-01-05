@@ -47,4 +47,14 @@ app.delete("/deleteTask", (req, res) => {
   });
 });
 
+app.put("/updateTask", (req, res) => {
+  const { id, task } = req.body;
+  const query = "UPDATE Tasks SET task = (?) WHERE id = (?) ";
+  db.run(query, [task, id], (err) => {
+    err
+      ? console.error(`edit unsuccesfull: ${err.message}`)
+      : console.log("edit successful");
+    res.json({ id: id, task });
+  });
+});
 app.listen(3000, () => console.log("listen at port 3000"));
