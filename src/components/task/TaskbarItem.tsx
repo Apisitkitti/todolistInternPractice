@@ -1,6 +1,6 @@
 import TaskbarButton from "./Taskbarbutton"
 import { taskItemType } from "../utility/taskType"
-import EditModal from "./EditModal"
+import Edit from "./Edit"
 import { useState } from "react"
 
 const TaskbarItem = (
@@ -19,7 +19,7 @@ const TaskbarItem = (
       className="flex justify-between my-1 relative">
       <div className="w-52">
         {taskItem.task}
-        <EditModal taskID={taskItem.id} isOpen={isOpen} />
+        <Edit taskID={taskItem.id} isOpen={isOpen} />
       </div>
 
       <div className="flex">

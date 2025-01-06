@@ -5,7 +5,6 @@ const App = () => {
     <div>
       <div className='flex justify-center font-bold '>TODOLIST</div>
       <Taskbar />
-
     </div >
   );
 }

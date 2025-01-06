@@ -6,7 +6,7 @@ var database = "../public/data/task.db";
 var app = express();
 app.use(cors());
 app.use(express.json());
-var sql = "CREATE TABLE IF NOT EXISTS Tasks(id INTEGER PRIMARY KEY AUTOINCREMENT,task TEXT)";
+var sql = "CREATE TABLE IF NOT EXISTS Tasks\n(id INTEGER NOT NULL PRIMARY KEY  AUTOINCREMENT,\n  task TEXT)";
 var db = new sqlite3.Database(database, sqlite3.OPEN_READWRITE, function (err) {
     if (err)
         return console.error(err);

@@ -1,7 +1,7 @@
 import { editTask } from "../utility/dataTransport"
 import TaskbarButton from "./Taskbarbutton"
 import { useState } from "react"
-const EditModal = ({ taskID, isOpen }: { taskID: number, isOpen: boolean }) => {
+const Edit = ({ taskID, isOpen }: { taskID: number, isOpen: boolean }) => {
   const [task, setTask] = useState<string>("");
 
   const handleEdit = () => {
@@ -23,4 +23,4 @@ const EditModal = ({ taskID, isOpen }: { taskID: number, isOpen: boolean }) => {
     </div>
   )
 }
-export default EditModal
+export default Edit
