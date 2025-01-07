@@ -37,7 +37,7 @@ app.post("/task", (req, res) => {
     err
       ? console.error(`push error: ${err.message}`)
       : console.log("push data successfull");
-    res.json({ id: this.lastID, task });
+    res.json({ task });
   });
 });
 
