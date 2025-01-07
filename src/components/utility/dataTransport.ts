@@ -1,6 +1,7 @@
 import { taskItemType } from "./taskType";
-const url = "http://localhost:3000";
+import { createClient } from "@libsql/client";
 
+const url = "http://localhost:3000";
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
   try {
     const taskData = await fetch(`${url}/allTasks`, {

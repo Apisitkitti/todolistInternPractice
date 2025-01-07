@@ -1,4 +1,6 @@
+"use strict";
 var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var sqlite3 = require("sqlite3").verbose();
 var cors = require("cors");
@@ -44,13 +46,13 @@ app.delete("/deleteTask", function (req, res) {
     });
 });
 app.put("/updateTask", function (req, res) {
-    var _a = req.body, id = _a.id, task = _a.task;
+    var taskWithID = req.body.taskWithID;
     var query = "UPDATE Tasks SET task = (?) WHERE id = (?) ";
-    db.run(query, [task, id], function (err) {
+    db.run(query, [taskWithID.task, taskWithID.id], function (err) {
         err
             ? console.error("edit unsuccesfull: ".concat(err.message))
             : console.log("edit successful");
-        res.json({ id: id, task: task });
+        res.json({ id: taskWithID.id, task: taskWithID.task });
     });
 });
 app.listen(3000, function () { return console.log("listen at port 3000"); });

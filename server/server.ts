@@ -1,3 +1,5 @@
+import { taskItemType } from "../src/components/utility/taskType";
+
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
@@ -29,7 +31,7 @@ app.get("/allTasks", (req, res) => {
 });
 
 app.post("/task", (req, res) => {
-  const { task } = req.body;
+  const { task }: { task: string } = req.body;
   const query = "INSERT INTO Tasks (task) VALUES (?) ";
   db.run(query, [task], (err) => {
     err
@@ -40,7 +42,7 @@ app.post("/task", (req, res) => {
 });
 
 app.delete("/deleteTask", (req, res) => {
-  const { id } = req.body;
+  const { id }: { id: number } = req.body;
   const query = "DELETE FROM Tasks WHERE id == (?)";
   db.run(query, [id], (err, rows) => {
     err
@@ -51,13 +53,13 @@ app.delete("/deleteTask", (req, res) => {
 });
 
 app.put("/updateTask", (req, res) => {
-  const { id, task } = req.body;
+  const { taskWithID }: { taskWithID: taskItemType } = req.body;
   const query = "UPDATE Tasks SET task = (?) WHERE id = (?) ";
-  db.run(query, [task, id], (err) => {
+  db.run(query, [taskWithID.task, taskWithID.id], (err) => {
     err
       ? console.error(`edit unsuccesfull: ${err.message}`)
       : console.log("edit successful");
-    res.json({ id: id, task });
+    res.json({ id: taskWithID.id, task: taskWithID.task });
   });
 });
 app.listen(3000, () => console.log("listen at port 3000"));
