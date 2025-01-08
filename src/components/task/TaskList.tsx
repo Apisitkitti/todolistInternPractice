@@ -1,7 +1,17 @@
 import { taskItemType } from "../utility/taskType"
 import TaskbarItem from "./TaskbarItem"
 import { deleteTask } from "../utility/dataTransport"
-const TaskList = ({ tasks }: { tasks: taskItemType[] }) => {
+
+const TaskList = ({
+  tasks,
+  editTask,
+  deleteTask
+}: {
+  tasks: taskItemType[],
+  editTask: (id: number, updateTask: string) => void,
+  deleteTask: (id: number) => void
+}) => {
+
   return (
     <div className="flex flex-col">
       {tasks.length !== 0 &&
@@ -11,7 +21,8 @@ const TaskList = ({ tasks }: { tasks: taskItemType[] }) => {
         <li key={taskItem.id} className=" rounded my-1 px-1 bg-emerald-400 flex list-none">
           <TaskbarItem
             taskItem={taskItem}
-            deleteTask={() => deleteTask(taskItem.id)} />
+            deleteTask={() => deleteTask(taskItem.id)}
+            editTask={editTask} />
         </li>
       )}
     </div>
