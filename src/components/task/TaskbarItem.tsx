@@ -6,11 +6,13 @@ import { useState } from "react"
 const TaskbarItem = (
   {
     taskItem,
-    deleteTask
+    deleteTask,
+    editTask
   }:
     {
       taskItem: taskItemType,
-      deleteTask: () => void
+      deleteTask: () => void,
+      editTask: (id: number, newText: string) => void
     }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
@@ -19,7 +21,12 @@ const TaskbarItem = (
       className="flex justify-between my-1 relative">
       <div className="w-52">
         {taskItem.task}
-        <Edit taskID={taskItem.id} isOpen={isOpen} />
+        {isOpen &&
+          <Edit
+            taskID={taskItem.id}
+            currentTask={taskItem.task}
+            editTask={editTask}
+            closeEdit={() => setIsOpen(false)} />}
       </div>
 
       <div className="flex">
