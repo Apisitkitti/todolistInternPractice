@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import TaskbarButton from "./Taskbarbutton"
-import { taskItemType } from "../utility/taskType"
-import TaskList from "./TaskList"
-import { fetchData, pushJsonData } from "../utility/dataTransport"
+import TaskbarButton from "../components/task/Taskbarbutton"
+import { taskItemType } from "../components/utility/taskType"
+import TaskList from "../components/task/TaskList"
+import { fetchData, pushJsonData } from "../components/utility/dataTransport"
 
 const Taskbar = () => {
   const [data, setData] = useState<taskItemType[]>([])

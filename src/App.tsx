@@ -1,9 +1,10 @@
 import React from 'react';
-import Taskbar from './components/task/Taskbar';
+import Taskbar from './Task/Taskbar';
+import Header from './header/Header';
 const App = () => {
   return (
     <div>
-      <div className='flex justify-center font-bold '>TODOLIST</div>
+      <Header />
       <Taskbar />
     </div >
   );
