@@ -16,6 +16,7 @@ const Edit = ({ taskID, isOpen }: { taskID: number, isOpen: boolean }) => {
             <input type="text"
               className="bg-transparent text-black px-1 focus:outline-none w-[245px]"
               onChange={(e) => setTask(e.target.value)}
+              value={task}
             />
           </div>
           <TaskbarButton color="bg-green-600" icon="Submit" iconAlt="add icon" onClick={handleEdit} />

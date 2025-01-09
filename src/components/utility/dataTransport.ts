@@ -1,5 +1,4 @@
 import { taskItemType } from "./taskType";
-import { createClient } from "@libsql/client";
 
 const url = "http://localhost:3000";
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
@@ -51,14 +50,14 @@ export const deleteTask = async (id: number) => {
     console.log("delete" + id);
   }
 };
-export const editTask = async (id: number, newTask: string) => {
+export const editTask = async (id: number, updateTask: string) => {
   try {
     const response = await fetch(`${url}/updateTask`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id, task: newTask }),
+      body: JSON.stringify({ id: id, updateTask: updateTask }),
     });
     if (response.ok) {
       alert("Edit Successfull");

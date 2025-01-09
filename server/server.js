@@ -1,6 +1,3 @@
-"use strict";
-var _this = this;
-Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var sqlite3 = require("sqlite3").verbose();
 var cors = require("cors");
@@ -32,7 +29,7 @@ app.post("/task", function (req, res) {
         err
             ? console.error("push error: ".concat(err.message))
             : console.log("push data successfull");
-        res.json({ id: _this.lastID, task: task });
+        res.json({ task: task });
     });
 });
 app.delete("/deleteTask", function (req, res) {
@@ -46,13 +43,13 @@ app.delete("/deleteTask", function (req, res) {
     });
 });
 app.put("/updateTask", function (req, res) {
-    var taskWithID = req.body.taskWithID;
+    var _a = req.body, id = _a.id, updateTask = _a.updateTask;
     var query = "UPDATE Tasks SET task = (?) WHERE id = (?) ";
-    db.run(query, [taskWithID.task, taskWithID.id], function (err) {
+    db.run(query, [updateTask, id], function (err) {
         err
             ? console.error("edit unsuccesfull: ".concat(err.message))
             : console.log("edit successful");
-        res.json({ id: taskWithID.id, task: taskWithID.task });
+        res.json({ id: id, task: updateTask });
     });
 });
 app.listen(3000, function () { return console.log("listen at port 3000"); });

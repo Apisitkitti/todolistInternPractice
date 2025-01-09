@@ -1,5 +1,3 @@
-import { taskItemType } from "../src/components/utility/taskType";
-
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
@@ -37,7 +35,7 @@ app.post("/task", (req, res) => {
     err
       ? console.error(`push error: ${err.message}`)
       : console.log("push data successfull");
-    res.json({ id: this.lastID, task });
+    res.json({ task });
   });
 });
 
@@ -53,13 +51,13 @@ app.delete("/deleteTask", (req, res) => {
 });
 
 app.put("/updateTask", (req, res) => {
-  const { taskWithID }: { taskWithID: taskItemType } = req.body;
+  const { id, updateTask }: { id: number; updateTask: string } = req.body;
   const query = "UPDATE Tasks SET task = (?) WHERE id = (?) ";
-  db.run(query, [taskWithID.task, taskWithID.id], (err) => {
+  db.run(query, [updateTask, id], (err) => {
     err
       ? console.error(`edit unsuccesfull: ${err.message}`)
       : console.log("edit successful");
-    res.json({ id: taskWithID.id, task: taskWithID.task });
+    res.json({ id: id, task: updateTask });
   });
 });
 app.listen(3000, () => console.log("listen at port 3000"));

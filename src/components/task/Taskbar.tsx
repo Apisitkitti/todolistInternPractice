@@ -31,13 +31,13 @@ const Taskbar = () => {
           <input type="text"
             aria-label="taskbarInput"
             placeholder="Input Your Task"
-            value={inputTask.task}
             className="bg-transparent text-black px-1 focus:outline-none"
             onChange={(e) => setInputTask(
               {
                 id: 0,
                 task: e.target.value
-              })} />
+              })}
+            value={(inputTask.task)} />
         </div>
         <TaskbarButton
           color="bg-green-600"
