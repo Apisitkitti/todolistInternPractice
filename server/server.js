@@ -1,5 +1,4 @@
 "use strict";
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var sqlite3 = require("sqlite3").verbose();
@@ -32,7 +31,7 @@ app.post("/task", function (req, res) {
         err
             ? console.error("push error: ".concat(err.message))
             : console.log("push data successfull");
-        res.json({ id: _this.lastID, task: task });
+        res.json({ task: task });
     });
 });
 app.delete("/deleteTask", function (req, res) {
