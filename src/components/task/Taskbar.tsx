@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import TaskbarButton from "./Taskbarbutton"
 import { taskItemType } from "../utility/taskType"
 import TaskList from "./TaskList"

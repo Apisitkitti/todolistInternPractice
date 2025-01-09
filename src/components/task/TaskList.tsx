@@ -1,6 +1,5 @@
 import { taskItemType } from "../utility/taskType"
 import TaskbarItem from "./TaskbarItem"
-import { deleteTask } from "../utility/dataTransport"
 
 const TaskList = ({
   tasks,
