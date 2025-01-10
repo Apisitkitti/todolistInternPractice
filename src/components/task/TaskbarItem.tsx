@@ -18,7 +18,7 @@ const TaskbarItem = (
       key={taskItem.id}
       className="flex justify-between my-1 relative">
       <div className="w-52">
-        {taskItem.task}
+        <p className="line-clamp-3"> {taskItem.task}</p>
         <Edit taskID={taskItem.id} isOpen={isOpen} />
       </div>
 

@@ -13,9 +13,9 @@ const TaskbarButton = (
       onClick?: () => void
     }) => {
   return (
-    <div className={`${color} size-7 p-1 w-max flex items-center rounded-md mx-0.5 text-white cursor-pointer `} onClick={onClick} >
+    <button className={`${color} size-7 p-1 w-max flex items-center rounded-md mx-0.5 text-white`} onClick={onClick} >
       {icon}
-    </div>
+    </button>
   )
 }
 export default TaskbarButton

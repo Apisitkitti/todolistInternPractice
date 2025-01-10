@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import TaskbarButton from "../components/task/Taskbarbutton"
 import { taskItemType } from "../components/utility/taskType"
 import TaskList from "../components/task/TaskList"
-import { fetchData, pushJsonData } from "../components/utility/dataTransport"
+import { fetchData, pushData } from "../components/utility/dataTransport"
 
 const Taskbar = () => {
   const [data, setData] = useState<taskItemType[]>([])
@@ -11,9 +11,9 @@ const Taskbar = () => {
       id: 0,
       task: ""
     })
-  const handleClickToPushDataToJson = () => {
+  const handlePush = () => {
     if (inputTask.task.trim() === "") return;
-    pushJsonData(inputTask.task)
+    pushData(inputTask.task)
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({
       id: 0,
@@ -44,7 +44,7 @@ const Taskbar = () => {
           color="bg-green-600"
           icon="Add"
           iconAlt="add button"
-          onClick={handleClickToPushDataToJson}
+          onClick={handlePush}
         />
       </div>
       <TaskList tasks={data} />

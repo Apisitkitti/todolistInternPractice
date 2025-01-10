@@ -13,7 +13,7 @@ export const fetchData = async (setData: (data: taskItemType[]) => void) => {
     console.error(err);
   }
 };
-export const pushJsonData = async (inputTask: string) => {
+export const pushData = async (inputTask: string) => {
   try {
     const response = await fetch(`${url}/task`, {
       method: "POST",
