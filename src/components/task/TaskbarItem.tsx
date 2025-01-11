@@ -1,7 +1,8 @@
 import TaskbarButton from "./Taskbarbutton"
-import { taskItemType } from "../utility/taskType"
 import Edit from "./Edit"
+import { taskItemType } from "../utility/taskType"
 import { useState } from "react"
+import { checkboxDataPush } from "../utility/dataTransport"
 
 const TaskbarItem = (
   {
@@ -13,12 +14,25 @@ const TaskbarItem = (
       deleteTask: () => void
     }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const handleCheckBox = (isCheckButtonIsCheck: boolean) => {
+    checkboxDataPush(taskItem.id, isCheckButtonIsCheck);
+  }
   return (
     <div
       key={taskItem.id}
-      className="flex justify-between my-1 relative">
-      <div className="w-52">
-        <p className="line-clamp-3"> {taskItem.task}</p>
+      className=" container flex justify-between my-1">
+      <div className="w-52 flex relative">
+        <div className="flex">
+          <input type="checkbox"
+            id="checklistBox"
+            className="accent-black text-black border-none"
+            checked={taskItem.isTaskFinish}
+            onChange={() => handleCheckBox(!taskItem.isTaskFinish)} />
+          <label
+            htmlFor="checklistBox"
+            className={` ${taskItem.isTaskFinish ? "line-through" : "no-underline"}`}>
+            {taskItem.task}</label>
+        </div>
         <Edit taskID={taskItem.id} isOpen={isOpen} />
       </div>
 
@@ -26,7 +40,7 @@ const TaskbarItem = (
         <TaskbarButton color="bg-sky-500" icon="Edit" iconAlt="edit icon" onClick={() => setIsOpen(true)} />
         <TaskbarButton color="bg-red-500" icon="Delete" iconAlt="delete icon" onClick={deleteTask} />
       </div>
-    </div>
+    </div >
   )
 }
 export default TaskbarItem

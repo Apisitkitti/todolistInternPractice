@@ -11,7 +11,7 @@ const Edit = ({ taskID, isOpen }: { taskID: number, isOpen: boolean }) => {
   return (
     <div>
       {isOpen &&
-        <form className="absolute flex top-0">
+        <form className="absolute flex top-0 left-0 h-max">
           <div className="w-full bg-white rounded-md flex items-center ">
             <input type="text"
               className="bg-transparent text-black px-1 focus:outline-none w-[245px]"

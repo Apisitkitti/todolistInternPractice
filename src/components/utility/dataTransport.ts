@@ -1,4 +1,6 @@
+import { METHODS } from "http";
 import { taskItemType } from "./taskType";
+import { json } from "stream/consumers";
 
 const url = "http://localhost:3000";
 export const fetchData = async (setData: (data: taskItemType[]) => void) => {
@@ -13,14 +15,14 @@ export const fetchData = async (setData: (data: taskItemType[]) => void) => {
     console.error(err);
   }
 };
-export const pushData = async (inputTask: string) => {
+export const pushData = async (inputTask: string, isCheck: boolean) => {
   try {
     const response = await fetch(`${url}/task`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ task: inputTask }),
+      body: JSON.stringify({ task: inputTask, isTaskFinish: isCheck }),
     });
     if (response.ok) {
       const result = await response.json;
@@ -64,5 +66,20 @@ export const editTask = async (id: number, updateTask: string) => {
     }
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const checkboxDataPush = async (id: number, isCheck: boolean) => {
+  try {
+    const response = await fetch(`${url}/checkboxTask`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, isCheck: isCheck }),
+    });
+    if (response.ok) console.log("task complete");
+  } catch (err) {
+    console.error("check fail", err);
   }
 };

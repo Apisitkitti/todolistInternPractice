@@ -9,15 +9,17 @@ const Taskbar = () => {
   const [inputTask, setInputTask] = useState<taskItemType>(
     {
       id: 0,
-      task: ""
+      task: "",
+      isTaskFinish: false
     })
   const handlePush = () => {
     if (inputTask.task.trim() === "") return;
-    pushData(inputTask.task)
+    pushData(inputTask.task, inputTask.isTaskFinish)
     setData((prevtask: taskItemType[]) => [...prevtask, inputTask]);
     setInputTask({
       id: 0,
-      task: ""
+      task: "",
+      isTaskFinish: false
     })
   }
 
@@ -36,7 +38,8 @@ const Taskbar = () => {
             onChange={(e) => setInputTask(
               {
                 id: 0,
-                task: e.target.value
+                task: e.target.value,
+                isTaskFinish: false
               })}
             value={(inputTask.task)} />
         </div>

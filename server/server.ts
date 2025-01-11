@@ -9,7 +9,7 @@ app.use(express.json());
 
 let sql = `CREATE TABLE IF NOT EXISTS Tasks
 (id INTEGER NOT NULL PRIMARY KEY  AUTOINCREMENT,
-  task TEXT)`;
+  task TEXT,isTaskFinish BOOLEAN)`;
 
 const db = new sqlite3.Database(database, sqlite3.OPEN_READWRITE, (err) => {
   if (err) return console.error(err);
@@ -29,9 +29,10 @@ app.get("/allTasks", (req, res) => {
 });
 
 app.post("/task", (req, res) => {
-  const { task }: { task: string } = req.body;
-  const query = "INSERT INTO Tasks (task) VALUES (?) ";
-  db.run(query, [task], (err) => {
+  const { task, isTaskFinish }: { task: string; isTaskFinish: boolean } =
+    req.body;
+  const query = "INSERT INTO Tasks (task,isTaskFinish) VALUES (?,?) ";
+  db.run(query, [task, isTaskFinish], (err) => {
     err
       ? console.error(`push error: ${err.message}`)
       : console.log("push data successfull");
@@ -60,4 +61,16 @@ app.put("/updateTask", (req, res) => {
     res.json({ id: id, task: updateTask });
   });
 });
+
+app.put("/checkboxTask", (req, res) => {
+  const { id, isCheck } = req.body;
+  const query = "UPDATE Tasks SET isTaskFinish = (?) WHERE id = (?)";
+  db.run(query, [isCheck, id], (err) => {
+    err
+      ? console.error(`cant check: ${err}`)
+      : console.log("now check", isCheck);
+    res.json({ id: id, isTaskFinish: isCheck });
+  });
+});
+
 app.listen(3000, () => console.log("listen at port 3000"));

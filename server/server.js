@@ -5,7 +5,7 @@ var database = "../public/data/task.db";
 var app = express();
 app.use(cors());
 app.use(express.json());
-var sql = "CREATE TABLE IF NOT EXISTS Tasks\n(id INTEGER NOT NULL PRIMARY KEY  AUTOINCREMENT,\n  task TEXT)";
+var sql = "CREATE TABLE IF NOT EXISTS Tasks\n(id INTEGER NOT NULL PRIMARY KEY  AUTOINCREMENT,\n  task TEXT,isTaskFinish BOOLEAN)";
 var db = new sqlite3.Database(database, sqlite3.OPEN_READWRITE, function (err) {
     if (err)
         return console.error(err);
@@ -23,9 +23,9 @@ app.get("/allTasks", function (req, res) {
     });
 });
 app.post("/task", function (req, res) {
-    var task = req.body.task;
-    var query = "INSERT INTO Tasks (task) VALUES (?) ";
-    db.run(query, [task], function (err) {
+    var _a = req.body, task = _a.task, isTaskFinish = _a.isTaskFinish;
+    var query = "INSERT INTO Tasks (task,isTaskFinish) VALUES (?,?) ";
+    db.run(query, [task, isTaskFinish], function (err) {
         err
             ? console.error("push error: ".concat(err.message))
             : console.log("push data successfull");
@@ -50,6 +50,16 @@ app.put("/updateTask", function (req, res) {
             ? console.error("edit unsuccesfull: ".concat(err.message))
             : console.log("edit successful");
         res.json({ id: id, task: updateTask });
+    });
+});
+app.put("/checkboxTask", function (req, res) {
+    var _a = req.body, id = _a.id, isCheck = _a.isCheck;
+    var query = "UPDATE Tasks SET isTaskFinish = (?) WHERE id = (?)";
+    db.run(query, [isCheck, id], function (err) {
+        err
+            ? console.error("cant check: ".concat(err))
+            : console.log("now check", isCheck);
+        res.json({ id: id, isTaskFinish: isCheck });
     });
 });
 app.listen(3000, function () { return console.log("listen at port 3000"); });
