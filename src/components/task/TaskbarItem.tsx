@@ -20,7 +20,7 @@ const TaskbarItem = (
   return (
     <div
       key={taskItem.id}
-      className=" container flex justify-between my-1">
+      className=" container flex justify-between my-1 rounded px-1 bg-slate-100 ">
       <div className="w-52 flex relative">
         <div className="flex">
           <input type="checkbox"
@@ -30,7 +30,7 @@ const TaskbarItem = (
             onChange={() => handleCheckBox(!taskItem.isTaskFinish)} />
           <label
             htmlFor="checklistBox"
-            className={` ${taskItem.isTaskFinish ? "line-through" : "no-underline"}`}>
+            className={` ${taskItem.isTaskFinish && "line-through"}`}>
             {taskItem.task}</label>
         </div>
         <Edit taskID={taskItem.id} isOpen={isOpen} />

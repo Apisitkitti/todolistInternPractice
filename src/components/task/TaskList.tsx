@@ -8,7 +8,7 @@ const TaskList = ({ tasks }: { tasks: taskItemType[] }) => {
         <div className="text-center font-semibold text-white ">Tasks</div>
       }
       {tasks.map((taskItem) =>
-        <li key={taskItem.id} className=" rounded my-1 px-1 bg-emerald-400 flex list-none">
+        <li key={taskItem.id} className=" rounded my-1 px-1 bg-slate-100 flex list-none">
           <TaskbarItem
             taskItem={taskItem}
             deleteTask={() => deleteTask(taskItem.id)} />
